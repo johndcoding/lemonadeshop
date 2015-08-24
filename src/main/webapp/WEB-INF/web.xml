@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app
+        xmlns="http://java.sun.com/xml/ns/javaee"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+        version="2.5">
+
+    <display-name>lemonadeshop</display-name>
+
+    <!-- Creation de client -->
+    <servlet>
+        <servlet-name>CreationClient</servlet-name>
+        <servlet-class>com.johndcoding.lemonadeshop.view.controler.CreationClient</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CreationClient</servlet-name>
+        <url-pattern>/creationClient</url-pattern>
+    </servlet-mapping>
+
+    <!-- Creation de commande -->
+    <servlet>
+        <servlet-name>CreationCommande</servlet-name>
+        <servlet-class>com.johndcoding.lemonadeshop.view.controler.CreationCommande</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CreationCommande</servlet-name>
+        <url-pattern>/creationCommande</url-pattern>
+    </servlet-mapping>
+
+
+    <welcome-file-list>
+        <welcome-file>index.jsp</welcome-file>
+    </welcome-file-list>
+
+</web-app>
+
