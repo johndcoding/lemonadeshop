@@ -20,23 +20,23 @@ public abstract class AbstractForm implements Serializable {
     }
 
 
-    public boolean hasErrors(){
-        return !errors.isEmpty();
+    public boolean isValidated() {
+        return errors.isEmpty();
     }
 
-    public List<ValidationError> getErrors(){
+    public List<ValidationError> getErrors() {
         return errors;
     }
 
-    public void validate(){
+    public void validate() {
         errors = new ArrayList<ValidationError>();
     }
 
-    public void addError(String champ, String message){
+    public void addError(String champ, String message) {
         errors.add(new ValidationError(champ, message));
     }
 
-    public void addErrorChampObligatoire(String champ){
+    public void addErrorChampObligatoire(String champ) {
         addError(champ, "champ ogligatoire");
     }
 

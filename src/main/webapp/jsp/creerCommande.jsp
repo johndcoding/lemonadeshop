@@ -1,42 +1,17 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <html>
 <head>
-    <link type="text/css" rel="stylesheet" href="static/css/style.css">
+    <link type="text/css" rel="stylesheet" href="<c:url value="/static/css/style.css"/>">
     <title>Creer commande</title>
 </head>
 <body>
 <h1>Créer une commande</h1>
+<c:import url="../partial/menu.jsp"/>
 
 <form method="post" action="creationCommande">
-    <fieldset>
-        <legend>Informations client</legend>
-        <table>
-            <tbody>
-            <tr>
-                <td><label for="nomClient">Nom <span class="requis">*</span> </label></td>
-                <td><input type="text" id="nomClient" name="nomClient" value="" size="20" maxlength="20"/></td>
-            </tr>
-            <tr>
-                <td><label for="prenomClient">Prénom <span class="requis">*</span> </label></td>
-                <td><input type="text" id="prenomClient" name="prenomClient" value="" size="20" maxlength="20"/></td>
-            </tr>
-            <tr>
-                <td><label for="telephoneClient">Tél <span class="requis">*</span> </label></td>
-                <td><input type="text" id="telephoneClient" name="telephoneClient" value="" size="20" maxlength="20"/>
-                </td>
-            </tr>
-            <tr>
-                <td><label for="adresseClient">Adresse <span class="requis">*</span> </label></td>
-                <td><input type="text" id="adresseClient" name="adresseClient" value="" size="60" maxlength="60"/>
-                </td>
-            </tr>
-            <tr>
-                <td><label for="emailClient">Email <span class="requis">*</span> </label></td>
-                <td><input type="text" id="emailClient" name="emailClient" value="" size="20" maxlength="60"/></td>
-            </tr>
-            </tbody>
-        </table>
-    </fieldset>
+    <c:import url="../partial/creerClientForm.jsp"/>
     <fieldset>
         <legend>Informations commande</legend>
         <table>

@@ -1,13 +1,25 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <html>
 <head>
+    <link type="text/css" rel="stylesheet" href="<c:url value="/static/css/style.css"/>">
     <title>Client</title>
 </head>
 <body>
 
 <h1>Nouveau client</h1>
+<c:import url="../partial/menu.jsp"/>
 
-<p class="info">${ message }</p>
+<c:choose>
+    <c:when test="${clientForm.validated}">
+        <p class="info">Le nouveau client est créé.</p>
+    </c:when>
+    <c:otherwise>
+        <p class="info">Un champ obligatoire n'a pas été saisie.</p>
+    </c:otherwise>
+</c:choose>
+
 
 <fieldset>
     <legend>Informations client</legend>
@@ -15,23 +27,23 @@
         <tbody>
         <tr>
             <td>Nom</td>
-            <td>${clientForm.nomClient}</td>
+            <td><c:out value="${clientForm.nomClient}" /></td>
         </tr>
         <tr>
             <td>Prénom</td>
-            <td>${clientForm.prenomClient}</td>
+            <td><c:out value="${clientForm.prenomClient}" /></td>
         </tr>
         <tr>
             <td>Tél</td>
-            <td>${clientForm.telephoneClient}</td>
+            <td><c:out value="${clientForm.telephoneClient}" /></td>
         </tr>
         <tr>
             <td>Adresse</td>
-            <td>${clientForm.adresseClient}</td>
+            <td><c:out value="${clientForm.adresseClient}" /></td>
         </tr>
         <tr>
             <td>Email</td>
-            <td> ${clientForm.emailClient} </td>
+            <td> <c:out value="${clientForm.emailClient}" /> </td>
         </tr>
         </tbody>
     </table>

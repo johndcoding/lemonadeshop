@@ -21,19 +21,8 @@ public class CreationCommande extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         final CreationCommandeForm form = new CreationCommandeForm(req);
-
         form.validate();
-
-
         req.setAttribute("commandeForm", form);
-
-        if(form.hasErrors()){
-            req.setAttribute("message", "Un champ obligatoire n'a pas été saisie.");
-        }else{
-            req.setAttribute("message", "Nouvelle commande saisie.");
-        }
-
-
         req.getRequestDispatcher("jsp/afficherCommande.jsp").forward(req, resp);
     }
 
