@@ -1,16 +1,18 @@
 package com.johndcoding.lemonadeshop.view.form;
 
+import com.johndcoding.lemonadeshop.core.util.CheckFormatUtil;
 import org.apache.commons.lang.StringUtils;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
+import java.util.List;
 
 public class CreationCommandeForm extends AbstractForm {
 
-    private String nomClient;
-    private String prenomClient;
-    private String telephoneClient;
-    private String adresseClient;
-    private String emailClient;
+    private static final int STATUT_LIVRAISON_MIN_LENGTH = 2;
+    private static final int STATUT_PAIEMENT_MIN_LENGTH = 2;
+    private List<SelectItem> listModeLivraisonCommande = new ArrayList<SelectItem>();
+    private List<SelectItem> listModePaiementCommande = new ArrayList<SelectItem>();
 
     private String dateCommande;
     private String montantCommande;
@@ -20,45 +22,6 @@ public class CreationCommandeForm extends AbstractForm {
     private String statutLivraisonCommande;
 
 
-    public String getNomClient() {
-        return nomClient;
-    }
-
-    public void setNomClient(String nomClient) {
-        this.nomClient = nomClient;
-    }
-
-    public String getPrenomClient() {
-        return prenomClient;
-    }
-
-    public void setPrenomClient(String prenomClient) {
-        this.prenomClient = prenomClient;
-    }
-
-    public String getTelephoneClient() {
-        return telephoneClient;
-    }
-
-    public void setTelephoneClient(String telephoneClient) {
-        this.telephoneClient = telephoneClient;
-    }
-
-    public String getAdresseClient() {
-        return adresseClient;
-    }
-
-    public void setAdresseClient(String adresseClient) {
-        this.adresseClient = adresseClient;
-    }
-
-    public String getEmailClient() {
-        return emailClient;
-    }
-
-    public void setEmailClient(String emailClient) {
-        this.emailClient = emailClient;
-    }
 
     public String getDateCommande() {
         return dateCommande;
@@ -108,51 +71,92 @@ public class CreationCommandeForm extends AbstractForm {
         this.statutLivraisonCommande = statutLivraisonCommande;
     }
 
+    public List<SelectItem> getListModeLivraisonCommande() {
+        return listModeLivraisonCommande;
+    }
+
+    public void setListModeLivraisonCommande(List<SelectItem> listModeLivraisonCommande) {
+        this.listModeLivraisonCommande = listModeLivraisonCommande;
+    }
+
+    public void setListModePaiementCommande(List<SelectItem> listModePaiementCommande) {
+        this.listModePaiementCommande = listModePaiementCommande;
+    }
+
+    public List<SelectItem> getListModePaiementCommande() {
+        return listModePaiementCommande;
+    }
+
+    public CreationCommandeForm() {
+        super();
+    }
+
     public CreationCommandeForm(HttpServletRequest req) {
         super(req);
-
-        nomClient = getStringParameter(req, "nomClient");
-        prenomClient = getStringParameter(req, "prenomClient");
-        telephoneClient = getStringParameter(req, "telephoneClient");
-        adresseClient = getStringParameter(req, "adresseClient");
-        emailClient = getStringParameter(req, "emailClient");
-
-
         dateCommande = getStringParameter(req, "dateCommande");
         montantCommande = getStringParameter(req, "montantCommande");
         modePaiementCommande = getStringParameter(req, "modePaiementCommande");
         statutPaiementCommande = getStringParameter(req, "statutPaiementCommande");
         modeLivraisonCommande = getStringParameter(req, "modeLivraisonCommande");
         statutLivraisonCommande = getStringParameter(req, "statutLivraisonCommande");
+
     }
 
     @Override
     public void validate() {
         super.validate();
 
-        if (StringUtils.isEmpty(nomClient)) {
-            addErrorChampObligatoire("nomClient");
-        }
-        if (StringUtils.isEmpty(prenomClient)) {
-            addErrorChampObligatoire("prenomClient");
-        }
-        if (StringUtils.isEmpty(emailClient)) {
-            addErrorChampObligatoire("emailClient");
-        }
-        if (StringUtils.isEmpty(adresseClient)) {
-            addErrorChampObligatoire("adresseClient");
+        if(modeLivraisonCommande != null) {
+            for (SelectItem modeLivraison : listModeLivraisonCommande) {
+                modeLivraison.setSelected(modeLivraisonCommande.equals(modeLivraison.getValue()));
+            }
         }
 
+        if(modePaiementCommande != null){
+            for(SelectItem modePaiement: listModePaiementCommande){
+                modePaiement.setSelected(modePaiementCommande.equals(modePaiement.getValue()));
+            }
+        }
 
-        if (StringUtils.isEmpty(montantCommande)) {
-            addErrorChampObligatoire("montantCommande");
+        validateMontantCommande();
+        validateModePaiement();
+        validateModeLivraison();
+
+        validateStatutPaiementCommande();
+        validateStatutLivraisonCommande();
+
+    }
+
+    private void validateStatutLivraisonCommande() {
+        if (!StringUtils.isEmpty(statutLivraisonCommande) && statutLivraisonCommande.length() < STATUT_LIVRAISON_MIN_LENGTH) {
+            addError("statutLivraisonCommande", "Longueur minimale non respectée");
         }
-        if (StringUtils.isEmpty(modePaiementCommande)) {
-            addErrorChampObligatoire("modePaiementCommande");
+    }
+
+    private void validateStatutPaiementCommande() {
+        if (!StringUtils.isEmpty(statutPaiementCommande) && statutPaiementCommande.length() < STATUT_PAIEMENT_MIN_LENGTH) {
+            addError("statutPaiementCommande", "Longueur minimale non respectée");
         }
+    }
+
+    private void validateModeLivraison() {
         if (StringUtils.isEmpty(modeLivraisonCommande)) {
             addErrorChampObligatoire("modeLivraisonCommande");
         }
-
     }
+
+    private void validateModePaiement() {
+        if (StringUtils.isEmpty(modePaiementCommande)) {
+            addErrorChampObligatoire("modePaiementCommande");
+        }
+    }
+
+    private void validateMontantCommande() {
+        if (StringUtils.isEmpty(montantCommande)) {
+            addErrorChampObligatoire("montantCommande");
+        }else if(!CheckFormatUtil.isDecimalNumber(modeLivraisonCommande)){
+            addError("montantCommande", "Le champ doit être de type numérique");
+        }
+    }
+
 }

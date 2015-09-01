@@ -26,23 +26,23 @@
         <tbody>
         <tr>
             <td>Nom</td>
-            <td><c:out value="${commandeForm.nomClient}" /></td>
+            <td><c:out value="${clientForm.nomClient}" /></td>
         </tr>
         <tr>
             <td>Prénom</td>
-            <td><c:out value="${commandeForm.prenomClient}" /></td>
+            <td><c:out value="${clientForm.prenomClient}" /></td>
         </tr>
         <tr>
             <td>Tél</td>
-            <td><c:out value="${commandeForm.telephoneClient}" /></td>
+            <td><c:out value="${clientForm.telephoneClient}" /></td>
         </tr>
         <tr>
             <td>Adresse</td>
-            <td><c:out value="${commandeForm.adresseClient}" /></td>
+            <td><c:out value="${clientForm.adresseClient}" /></td>
         </tr>
         <tr>
             <td>Email</td>
-            <td><c:out value="${commandeForm.emailClient}" /> </td>
+            <td> <c:out value="${clientForm.emailClient}" /> </td>
         </tr>
         </tbody>
     </table>

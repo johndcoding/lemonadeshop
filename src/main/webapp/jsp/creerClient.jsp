@@ -11,6 +11,10 @@
 <c:import url="../partial/menu.jsp"/>
 
 <form method="post" action="creationClient">
+
+    <c:if test="${not empty msgError}">
+        <p class="error"><c:out value="${msgError}"/> </p>
+    </c:if>
     <c:import url="../partial/creerClientForm.jsp"/>
     <input type="submit" value="valider"/>
     <input type="reset" value="RAZ">

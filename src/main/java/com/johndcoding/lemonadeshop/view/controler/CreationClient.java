@@ -21,8 +21,14 @@ public class CreationClient extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         final CreationClientForm form = new CreationClientForm(req);
-        form.validate();
         req.setAttribute("clientForm", form);
-        req.getRequestDispatcher("jsp/afficherClient.jsp").forward(req, resp);
+        form.validate();
+
+        if (form.hasErrors()) {
+            req.setAttribute("msgError", "Le formulaire n'est pas valide. Veuillez corriger.");
+            req.getRequestDispatcher("jsp/creerClient.jsp").forward(req, resp);
+        } else {
+            req.getRequestDispatcher("jsp/afficherClient.jsp").forward(req, resp);
+        }
     }
 }
