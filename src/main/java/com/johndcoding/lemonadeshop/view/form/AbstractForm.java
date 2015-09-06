@@ -1,13 +1,18 @@
 package com.johndcoding.lemonadeshop.view.form;
 
 
+import com.johndcoding.lemonadeshop.view.lang.LangUtil;
+
+import javax.ejb.Local;
 import javax.servlet.http.HttpServletRequest;
 import java.io.Serializable;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 public abstract class AbstractForm implements Serializable {
 
+    protected Locale currentLocale;
 
     /**
      * Map des erreurs de validations. La le correspond a l'identifiant du champ et la value a l'erreur
@@ -15,7 +20,7 @@ public abstract class AbstractForm implements Serializable {
     private Map<String,ValidationError> errors = new HashMap<String, ValidationError>();
 
     public AbstractForm(HttpServletRequest req) {
-
+        currentLocale = req.getLocale();
     }
 
     public AbstractForm(){
@@ -44,7 +49,7 @@ public abstract class AbstractForm implements Serializable {
     }
 
     public void addErrorChampObligatoire(String champ) {
-        addError(champ, "champ ogligatoire");
+        addError(champ, LangUtil.getMessage(currentLocale, "error.champ.obligatoire"));
     }
 
     public boolean hasErrors(){ return !errors.isEmpty();}

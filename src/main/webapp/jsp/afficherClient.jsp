@@ -1,49 +1,52 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
+<fmt:setBundle basename="app" var="buld"/>
 
 <html>
 <head>
     <link type="text/css" rel="stylesheet" href="<c:url value="/static/css/style.css"/>">
-    <title>Client</title>
+    <title><fmt:message key="client.affichage.titre" bundle="${buld}"/></title>
 </head>
 <body>
 
-<h1>Nouveau client</h1>
+<h1><fmt:message key="client.affichage.titre" bundle="${buld}"/></h1>
 <c:import url="../partial/menu.jsp"/>
 
 <c:choose>
     <c:when test="${clientForm.validated}">
-        <p class="info">Le nouveau client est créé.</p>
+        <p class="info"><fmt:message key="client.creation.success" bundle="${buld}"/></p>
     </c:when>
     <c:otherwise>
-        <p class="info">Un champ obligatoire n'a pas été saisie.</p>
+        <p class="info"><fmt:message key="client.creation.fail" bundle="${buld}"/></p>
     </c:otherwise>
 </c:choose>
 
 
 <fieldset>
-    <legend>Informations client</legend>
+    <legend><fmt:message key="client.fieldset.informations" bundle="${buld}"/></legend>
     <table>
         <tbody>
         <tr>
-            <td>Nom</td>
-            <td><c:out value="${clientForm.nomClient}" /></td>
+            <td><fmt:message key="client.nom" bundle="${buld}"/></td>
+            <td><c:out value="${clientForm.nomClient}"/></td>
         </tr>
         <tr>
-            <td>Prénom</td>
-            <td><c:out value="${clientForm.prenomClient}" /></td>
+            <td><fmt:message key="client.prenom" bundle="${buld}"/></td>
+            <td><c:out value="${clientForm.prenomClient}"/></td>
         </tr>
         <tr>
-            <td>Tél</td>
-            <td><c:out value="${clientForm.telephoneClient}" /></td>
+            <td><fmt:message key="client.telephone" bundle="${buld}"/></td>
+            <td><c:out value="${clientForm.telephoneClient}"/></td>
         </tr>
         <tr>
-            <td>Adresse</td>
-            <td><c:out value="${clientForm.adresseClient}" /></td>
+            <td><fmt:message key="client.adresse" bundle="${buld}"/></td>
+            <td><c:out value="${clientForm.adresseClient}"/></td>
         </tr>
         <tr>
-            <td>Email</td>
-            <td> <c:out value="${clientForm.emailClient}" /> </td>
+            <td><fmt:message key="client.email" bundle="${buld}"/></td>
+            <td><c:out value="${clientForm.emailClient}"/></td>
         </tr>
         </tbody>
     </table>

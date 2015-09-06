@@ -4,6 +4,7 @@ package com.johndcoding.lemonadeshop.view.controler;
 import com.johndcoding.lemonadeshop.view.form.CreationClientForm;
 import com.johndcoding.lemonadeshop.view.form.CreationCommandeForm;
 import com.johndcoding.lemonadeshop.view.form.SelectItem;
+import com.johndcoding.lemonadeshop.view.lang.LangUtil;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -40,7 +41,7 @@ public class CreationCommande extends HttpServlet {
         commandeForm.validate();
 
         if(clientForm.hasErrors() || commandeForm.hasErrors()){
-            req.setAttribute("msgError", "Le formulaire n'est pas valide. Veuillez corriger.");
+            req.setAttribute("msgError",  LangUtil.getMessage(req.getLocale(), "error.form"));
             req.getRequestDispatcher("jsp/creerCommande.jsp").forward(req, resp);
         }else{
             req.getRequestDispatcher("jsp/afficherCommande.jsp").forward(req, resp);

@@ -2,6 +2,7 @@ package com.johndcoding.lemonadeshop.view.controler;
 
 
 import com.johndcoding.lemonadeshop.view.form.CreationClientForm;
+import com.johndcoding.lemonadeshop.view.lang.LangUtil;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -25,7 +26,7 @@ public class CreationClient extends HttpServlet {
         form.validate();
 
         if (form.hasErrors()) {
-            req.setAttribute("msgError", "Le formulaire n'est pas valide. Veuillez corriger.");
+            req.setAttribute("msgError", LangUtil.getMessage(req.getLocale(), "error.form"));
             req.getRequestDispatcher("jsp/creerClient.jsp").forward(req, resp);
         } else {
             req.getRequestDispatcher("jsp/afficherClient.jsp").forward(req, resp);

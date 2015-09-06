@@ -75,8 +75,16 @@
                     <optimize>true</optimize>
                 </configuration>
             </plugin>
+
+
         </plugins>
 
+        <!-- Reprise des ressources lors de la creation du war-->
+        <resources>
+            <resource>
+                <directory>src/main/ressources</directory>
+            </resource>
+        </resources>
     </build>
 
 

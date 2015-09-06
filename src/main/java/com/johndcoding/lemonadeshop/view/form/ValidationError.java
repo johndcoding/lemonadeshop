@@ -26,9 +26,7 @@ public class ValidationError {
     }
 
     @Override
-    public String toString() {
-        return champ + " : " + message;
-    }
+    public String toString() {return message;}
 
 
     @Override

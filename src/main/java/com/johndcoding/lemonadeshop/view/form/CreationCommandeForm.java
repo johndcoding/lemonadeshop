@@ -1,11 +1,13 @@
 package com.johndcoding.lemonadeshop.view.form;
 
 import com.johndcoding.lemonadeshop.core.util.CheckFormatUtil;
+import com.johndcoding.lemonadeshop.view.lang.LangUtil;
 import org.apache.commons.lang.StringUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class CreationCommandeForm extends AbstractForm {
 
@@ -129,13 +131,13 @@ public class CreationCommandeForm extends AbstractForm {
 
     private void validateStatutLivraisonCommande() {
         if (!StringUtils.isEmpty(statutLivraisonCommande) && statutLivraisonCommande.length() < STATUT_LIVRAISON_MIN_LENGTH) {
-            addError("statutLivraisonCommande", "Longueur minimale non respectée");
+            addError("statutLivraisonCommande", LangUtil.getMessage(currentLocale, "error.longueur.min", STATUT_LIVRAISON_MIN_LENGTH));
         }
     }
 
     private void validateStatutPaiementCommande() {
         if (!StringUtils.isEmpty(statutPaiementCommande) && statutPaiementCommande.length() < STATUT_PAIEMENT_MIN_LENGTH) {
-            addError("statutPaiementCommande", "Longueur minimale non respectée");
+            addError("statutPaiementCommande", LangUtil.getMessage(currentLocale, "error.longueur.min", STATUT_PAIEMENT_MIN_LENGTH));
         }
     }
 
@@ -155,7 +157,7 @@ public class CreationCommandeForm extends AbstractForm {
         if (StringUtils.isEmpty(montantCommande)) {
             addErrorChampObligatoire("montantCommande");
         }else if(!CheckFormatUtil.isDecimalNumber(modeLivraisonCommande)){
-            addError("montantCommande", "Le champ doit être de type numérique");
+            addError("montantCommande", LangUtil.getMessage(currentLocale, "error.format.nombre.decimal"));
         }
     }
 

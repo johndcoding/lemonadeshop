@@ -2,9 +2,11 @@ package com.johndcoding.lemonadeshop.view.form;
 
 
 import com.johndcoding.lemonadeshop.core.util.CheckFormatUtil;
+import com.johndcoding.lemonadeshop.view.lang.LangUtil;
 import org.apache.commons.lang.StringUtils;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Locale;
 import java.util.regex.Pattern;
 
 public class CreationClientForm extends AbstractForm {
@@ -65,6 +67,7 @@ public class CreationClientForm extends AbstractForm {
     public CreationClientForm(HttpServletRequest req) {
         super(req);
 
+
         nomClient = getStringParameter(req, "nomClient");
         prenomClient = getStringParameter(req, "prenomClient");
         telephoneClient = getStringParameter(req, "telephoneClient");
@@ -85,7 +88,7 @@ public class CreationClientForm extends AbstractForm {
         if (StringUtils.isEmpty(emailClient)) {
             addErrorChampObligatoire("emailClient");
         }else if(!CheckFormatUtil.isEmail(emailClient)){
-            addError("emailClient", "Adresse email non valide.");
+            addError("emailClient", LangUtil.getMessage(currentLocale, "error.format.email"));
         }
     }
 
@@ -93,7 +96,7 @@ public class CreationClientForm extends AbstractForm {
         if (StringUtils.isEmpty(adresseClient)) {
             addErrorChampObligatoire("adresseClient");
         }else if(adresseClient.length() < ADRESSE_MIN_LENGHT){
-            addError("adresseClient", "Taille minimale non respectée");
+            addError("adresseClient", LangUtil.getMessage(currentLocale, "error.longueur.min", ADRESSE_MIN_LENGHT));
         }
     }
 
@@ -101,9 +104,9 @@ public class CreationClientForm extends AbstractForm {
         if (StringUtils.isEmpty(telephoneClient)) {
             addErrorChampObligatoire("telephoneClient");
         }else if(telephoneClient.length() < TELEPHONE_MIN_LENGHT){
-            addError("telephoneClient", "Taille minimale non respectée");
+            addError("telephoneClient", LangUtil.getMessage(currentLocale, "error.longueur.min", TELEPHONE_MIN_LENGHT));
         }else if(!StringUtils.isNumeric(telephoneClient)){
-            addError("telephoneClient", "Le champ doit être de type numérique");
+            addError("telephoneClient", LangUtil.getMessage(currentLocale, "error.format.nombre.entier"));
         }
     }
 
@@ -111,7 +114,7 @@ public class CreationClientForm extends AbstractForm {
         if (StringUtils.isEmpty(prenomClient)) {
             addErrorChampObligatoire("prenomClient");
         }else if(prenomClient.length() < PRENOM_MIN_LENGHT){
-            addError("prenomClient", "Taille minimale non respectée");
+            addError("prenomClient",  LangUtil.getMessage(currentLocale, "error.longueur.min", PRENOM_MIN_LENGHT));
         }
     }
 
@@ -119,7 +122,7 @@ public class CreationClientForm extends AbstractForm {
         if (StringUtils.isEmpty(nomClient)) {
             addErrorChampObligatoire("nomClient");
         }else if(nomClient.length() < NOM_MIN_LENGHT){
-            addError("nomClient", "Taille minimale non respectée");
+            addError("nomClient",  LangUtil.getMessage(currentLocale, "error.longueur.min", NOM_MIN_LENGHT));
         }
     }
 
