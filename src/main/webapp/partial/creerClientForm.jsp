@@ -3,8 +3,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <fmt:setBundle basename="app" var="buld"/>
-<fieldset>
-    <legend><fmt:message key="client.fieldset.informations" bundle="${buld}"/></legend>
+
     <table>
         <tbody>
         <tr>
@@ -47,4 +46,3 @@
         </tr>
         </tbody>
     </table>
-</fieldset>

@@ -60,3 +60,22 @@ form input.sansLabel {
     font-style: italic;
     color: #E8A22B;
 }
+
+/* Tableaux -------------------------------------------------------------------------- */
+table.list{
+    margin: 10px;
+    border-collapse: collapse;
+}
+table.list th{
+    border: 1px #0568CD solid;
+    color: #0568CD;
+    margin: 0px;
+}
+table.list td{
+    border: 1px #999999 solid;
+    margin: 0px;
+}
+
+table.list tr.pair{
+    background-color: #999;
+}

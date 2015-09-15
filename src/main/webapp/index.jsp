@@ -17,6 +17,10 @@
     <li><a href="<c:url value="/creationClient"/>"><fmt:message key="menu.nouveau.client" bundle="${buld}"/></a></li>
     <li><a href="<c:url value="/creationCommande"/>"><fmt:message key="menu.nouveau.commande" bundle="${buld}"/></a>
     </li>
+    <li><a href="<c:url value="/listerClients"/>"><fmt:message key="menu.lister.clients" bundle="${buld}"/></a>
+    </li>
+    <li><a href="<c:url value="/listerCommandes"/>"><fmt:message key="menu.lister.commandes" bundle="${buld}"/></a>
+    </li>
 </ul>
 </body>
 </html>

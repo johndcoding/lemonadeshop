@@ -14,15 +14,7 @@
 <h1><fmt:message key="client.affichage.titre" bundle="${buld}"/></h1>
 <c:import url="../partial/menu.jsp"/>
 
-<c:choose>
-    <c:when test="${clientForm.validated}">
-        <p class="info"><fmt:message key="client.creation.success" bundle="${buld}"/></p>
-    </c:when>
-    <c:otherwise>
-        <p class="info"><fmt:message key="client.creation.fail" bundle="${buld}"/></p>
-    </c:otherwise>
-</c:choose>
-
+<p class="info"><fmt:message key="client.creation.success" bundle="${buld}"/></p>
 
 <fieldset>
     <legend><fmt:message key="client.fieldset.informations" bundle="${buld}"/></legend>
@@ -30,23 +22,23 @@
         <tbody>
         <tr>
             <td><fmt:message key="client.nom" bundle="${buld}"/></td>
-            <td><c:out value="${clientForm.nomClient}"/></td>
+            <td><c:out value="${client.nom}"/></td>
         </tr>
         <tr>
             <td><fmt:message key="client.prenom" bundle="${buld}"/></td>
-            <td><c:out value="${clientForm.prenomClient}"/></td>
+            <td><c:out value="${client.prenom}"/></td>
         </tr>
         <tr>
             <td><fmt:message key="client.telephone" bundle="${buld}"/></td>
-            <td><c:out value="${clientForm.telephoneClient}"/></td>
+            <td><c:out value="${client.tel}"/></td>
         </tr>
         <tr>
             <td><fmt:message key="client.adresse" bundle="${buld}"/></td>
-            <td><c:out value="${clientForm.adresseClient}"/></td>
+            <td><c:out value="${client.adresse}"/></td>
         </tr>
         <tr>
             <td><fmt:message key="client.email" bundle="${buld}"/></td>
-            <td><c:out value="${clientForm.emailClient}"/></td>
+            <td><c:out value="${client.email}"/></td>
         </tr>
         </tbody>
     </table>

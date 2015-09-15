@@ -27,6 +27,44 @@
         <url-pattern>/creationCommande</url-pattern>
     </servlet-mapping>
 
+    <!-- Lister commandes -->
+    <servlet>
+        <servlet-name>ListerCommandes</servlet-name>
+        <servlet-class>com.johndcoding.lemonadeshop.view.controler.ListerCommandes</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ListerCommandes</servlet-name>
+        <url-pattern>/listerCommandes</url-pattern>
+    </servlet-mapping>
+
+    <!-- Lister clients -->
+    <servlet>
+        <servlet-name>ListerClients</servlet-name>
+        <servlet-class>com.johndcoding.lemonadeshop.view.controler.ListerClients</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ListerClients</servlet-name>
+        <url-pattern>/listerClients</url-pattern>
+    </servlet-mapping>
+
+    <!-- Supprimer client-->
+    <servlet>
+        <servlet-name>SupprimerClient</servlet-name>
+        <servlet-class>com.johndcoding.lemonadeshop.view.controler.SupprimerClient</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>SupprimerClient</servlet-name>
+        <url-pattern>/supprimerClient</url-pattern>
+    </servlet-mapping>
+    <!-- Supprimer Commande-->
+    <servlet>
+        <servlet-name>SupprimerCommande</servlet-name>
+        <servlet-class>com.johndcoding.lemonadeshop.view.controler.SupprimerCommande</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>SupprimerCommande</servlet-name>
+        <url-pattern>/supprimerCommande</url-pattern>
+    </servlet-mapping>
 
     <welcome-file-list>
         <welcome-file>index.jsp</welcome-file>

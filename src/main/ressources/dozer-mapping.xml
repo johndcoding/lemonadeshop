@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mappings xmlns="http://dozer.sourceforge.net"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://dozer.sourceforge.net
+          http://dozer.sourceforge.net/schema/beanmapping.xsd">
+
+
+    <mapping wildcard="false">
+        <class-a>com.johndcoding.lemonadeshop.view.form.CreationClientForm</class-a>
+        <class-b>com.johndcoding.lemonadeshop.view.dto.ClientDTO</class-b>
+        <field>
+            <a>nomClient</a>
+            <b>nom</b>
+        </field>
+        <field>
+            <a>prenomClient</a>
+            <b>prenom</b>
+        </field>
+        <field>
+            <a>telephoneClient</a>
+            <b>tel</b>
+        </field>
+        <field>
+            <a>emailClient</a>
+            <b>email</b>
+        </field>
+        <field>
+            <a>adresseClient</a>
+            <b>adresse</b>
+        </field>
+    </mapping>
+
+    <mapping wildcard="false">
+        <class-a>com.johndcoding.lemonadeshop.view.form.CreationCommandeForm</class-a>
+        <class-b>com.johndcoding.lemonadeshop.view.dto.CommandeDTO</class-b>
+        <field>
+            <a>montantCommande</a>
+            <b>montant</b>
+        </field>
+        <field><a>dateCommande</a><b>dateCreation</b></field>
+        <field><a>modePaiementCommande</a><b>modePaiement</b></field>
+        <field><a>statutPaiementCommande</a><b>statutPaiement</b></field>
+        <field><a>modeLivraisonCommande</a><b>modeLivraison</b></field>
+        <field><a>statutLivraisonCommande</a><b>statutLivraison</b></field>
+        <field>
+            <a>creationClientForm</a>
+            <b>client</b>
+            <b-hint>com.johndcoding.lemonadeshop.view.dto.ClientDTO</b-hint>
+        </field>
+    </mapping>
+
+</mappings>

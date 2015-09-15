@@ -14,14 +14,8 @@
 
 <h1><fmt:message key="commande.affichage.titre" bundle="${buld}"/></h1>
 <c:import url="../partial/menu.jsp"/>
-<c:choose>
-    <c:when test="${commandeForm.validated}">
-        <p class="info"><fmt:message key="commande.creation.success" bundle="${buld}"/></p>
-    </c:when>
-    <c:otherwise>
-        <p class="info"><fmt:message key="commande.creation.fail" bundle="${buld}"/></p>
-    </c:otherwise>
-</c:choose>
+
+<p class="info"><fmt:message key="commande.creation.success" bundle="${buld}"/></p>
 
 
 <fieldset>
@@ -30,23 +24,23 @@
         <tbody>
         <tr>
             <td><fmt:message key="client.nom" bundle="${buld}"/></td>
-            <td><c:out value="${clientForm.nomClient}"/></td>
+            <td><c:out value="${commande.client.nom}"/></td>
         </tr>
         <tr>
             <td><fmt:message key="client.prenom" bundle="${buld}"/></td>
-            <td><c:out value="${clientForm.prenomClient}"/></td>
+            <td><c:out value="${commande.client.prenom}"/></td>
         </tr>
         <tr>
             <td><fmt:message key="client.telephone" bundle="${buld}"/></td>
-            <td><c:out value="${clientForm.telephoneClient}"/></td>
+            <td><c:out value="${commande.client.tel}"/></td>
         </tr>
         <tr>
             <td><fmt:message key="client.adresse" bundle="${buld}"/></td>
-            <td><c:out value="${clientForm.adresseClient}"/></td>
+            <td><c:out value="${commande.client.adresse}"/></td>
         </tr>
         <tr>
             <td><fmt:message key="client.email" bundle="${buld}"/></td>
-            <td><c:out value="${clientForm.emailClient}"/></td>
+            <td><c:out value="${commande.client.email}"/></td>
         </tr>
         </tbody>
     </table>
@@ -58,27 +52,27 @@
         <tbody>
         <tr>
             <td><fmt:message key="commande.date.creation" bundle="${buld}"/></td>
-            <td><c:out value="${commandeForm.dateCommande}"/></td>
+            <td><fmt:formatDate value="${commande.dateCreation}" type="both" /></td>
         </tr>
         <tr>
             <td><fmt:message key="commande.montant" bundle="${buld}"/></td>
-            <td><c:out value="${commandeForm.montantCommande}"/></td>
+            <td><c:out value="${commande.montant}"/></td>
         </tr>
         <tr>
             <td><fmt:message key="commande.mode.paiement" bundle="${buld}"/></td>
-            <td><c:out value="${commandeForm.modePaiementCommande}"/></td>
+            <td><c:out value="${commande.modePaiement}"/></td>
         </tr>
         <tr>
             <td><fmt:message key="commande.statut.paiement" bundle="${buld}"/></td>
-            <td><c:out value="${commandeForm.statutPaiementCommande}"/></td>
+            <td><c:out value="${commande.statutPaiement}"/></td>
         </tr>
         <tr>
             <td><fmt:message key="commande.mode.livraison" bundle="${buld}"/></td>
-            <td><c:out value="${commandeForm.modeLivraisonCommande}"/></td>
+            <td><c:out value="${commande.modeLivraison}"/></td>
         </tr>
         <tr>
             <td><fmt:message key="commande.statut.livraison" bundle="${buld}"/></td>
-            <td><c:out value="${commandeForm.statutLivraisonCommande}"/></td>
+            <td><c:out value="${commande.statutLivraison}"/></td>
         </tr>
         </tbody>
     </table>

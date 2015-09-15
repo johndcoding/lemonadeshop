@@ -1,13 +1,14 @@
 package com.johndcoding.lemonadeshop.view.form;
 
 import com.johndcoding.lemonadeshop.core.util.CheckFormatUtil;
+import com.johndcoding.lemonadeshop.entity.ModeLivraisonEnum;
+import com.johndcoding.lemonadeshop.entity.ModePaiementEnum;
 import com.johndcoding.lemonadeshop.view.lang.LangUtil;
 import org.apache.commons.lang.StringUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 public class CreationCommandeForm extends AbstractForm {
 
@@ -15,14 +16,19 @@ public class CreationCommandeForm extends AbstractForm {
     private static final int STATUT_PAIEMENT_MIN_LENGTH = 2;
     private List<SelectItem> listModeLivraisonCommande = new ArrayList<SelectItem>();
     private List<SelectItem> listModePaiementCommande = new ArrayList<SelectItem>();
+    private List<SelectItem> listClientExistant = new ArrayList<SelectItem>();
+
 
     private String dateCommande;
     private String montantCommande;
-    private String modePaiementCommande;
+    private ModePaiementEnum modePaiementCommande;
     private String statutPaiementCommande;
-    private String modeLivraisonCommande;
+    private ModeLivraisonEnum modeLivraisonCommande;
     private String statutLivraisonCommande;
 
+    private Boolean creerNouveauClient;
+    private String idClientSelected;//TODO changer le type d'identifiant du client selectionne une fois la BDD traitee.
+    private CreationClientForm creationClientForm;
 
 
     public String getDateCommande() {
@@ -41,11 +47,11 @@ public class CreationCommandeForm extends AbstractForm {
         this.montantCommande = montantCommande;
     }
 
-    public String getModePaiementCommande() {
+    public ModePaiementEnum getModePaiementCommande() {
         return modePaiementCommande;
     }
 
-    public void setModePaiementCommande(String modePaiementCommande) {
+    public void setModePaiementCommande(ModePaiementEnum modePaiementCommande) {
         this.modePaiementCommande = modePaiementCommande;
     }
 
@@ -57,11 +63,11 @@ public class CreationCommandeForm extends AbstractForm {
         this.statutPaiementCommande = statutPaiementCommande;
     }
 
-    public String getModeLivraisonCommande() {
+    public ModeLivraisonEnum getModeLivraisonCommande() {
         return modeLivraisonCommande;
     }
 
-    public void setModeLivraisonCommande(String modeLivraisonCommande) {
+    public void setModeLivraisonCommande(ModeLivraisonEnum modeLivraisonCommande) {
         this.modeLivraisonCommande = modeLivraisonCommande;
     }
 
@@ -89,6 +95,38 @@ public class CreationCommandeForm extends AbstractForm {
         return listModePaiementCommande;
     }
 
+    public Boolean getCreerNouveauClient() {
+        return creerNouveauClient;
+    }
+
+    public void setCreerNouveauClient(Boolean creerNouveauClient) {
+        this.creerNouveauClient = creerNouveauClient;
+    }
+
+    public String getIdClientSelected() {
+        return idClientSelected;
+    }
+
+    public void setIdClientSelected(String idClientSelected) {
+        this.idClientSelected = idClientSelected;
+    }
+
+    public List<SelectItem> getListClientExistant() {
+        return listClientExistant;
+    }
+
+    public void setListClientExistant(List<SelectItem> listClientExistant) {
+        this.listClientExistant = listClientExistant;
+    }
+
+    public CreationClientForm getCreationClientForm() {
+        return creationClientForm;
+    }
+
+    public void setCreationClientForm(CreationClientForm creationClientForm) {
+        this.creationClientForm = creationClientForm;
+    }
+
     public CreationCommandeForm() {
         super();
     }
@@ -97,26 +135,41 @@ public class CreationCommandeForm extends AbstractForm {
         super(req);
         dateCommande = getStringParameter(req, "dateCommande");
         montantCommande = getStringParameter(req, "montantCommande");
-        modePaiementCommande = getStringParameter(req, "modePaiementCommande");
+        final String strModePaiement = getStringParameter(req, "modePaiementCommande");
+        if(!StringUtils.isEmpty(strModePaiement)){
+            modePaiementCommande = ModePaiementEnum.valueOf(strModePaiement);
+        }
         statutPaiementCommande = getStringParameter(req, "statutPaiementCommande");
-        modeLivraisonCommande = getStringParameter(req, "modeLivraisonCommande");
+        final String strModeLivraison = getStringParameter(req, "modeLivraisonCommande");
+        if(!StringUtils.isEmpty(strModeLivraison)){
+            modeLivraisonCommande = ModeLivraisonEnum.valueOf(strModeLivraison);
+        }
         statutLivraisonCommande = getStringParameter(req, "statutLivraisonCommande");
+        idClientSelected = getStringParameter(req, "clientExistant");
+        creerNouveauClient = getRadioTrueFalse(req, "creerNouveauClient");
 
+        creationClientForm = new CreationClientForm(req);
     }
 
     @Override
     public void validate() {
         super.validate();
 
-        if(modeLivraisonCommande != null) {
+        if (modeLivraisonCommande != null) {
             for (SelectItem modeLivraison : listModeLivraisonCommande) {
                 modeLivraison.setSelected(modeLivraisonCommande.equals(modeLivraison.getValue()));
             }
         }
 
-        if(modePaiementCommande != null){
-            for(SelectItem modePaiement: listModePaiementCommande){
+        if (modePaiementCommande != null) {
+            for (SelectItem modePaiement : listModePaiementCommande) {
                 modePaiement.setSelected(modePaiementCommande.equals(modePaiement.getValue()));
+            }
+        }
+
+        if(idClientSelected != null){
+            for(SelectItem client : listClientExistant){
+                client.setSelected(idClientSelected.equals(client.getValue()));
             }
         }
 
@@ -127,6 +180,9 @@ public class CreationCommandeForm extends AbstractForm {
         validateStatutPaiementCommande();
         validateStatutLivraisonCommande();
 
+        creationClientForm.validate();
+
+        validateClient();
     }
 
     private void validateStatutLivraisonCommande() {
@@ -142,13 +198,13 @@ public class CreationCommandeForm extends AbstractForm {
     }
 
     private void validateModeLivraison() {
-        if (StringUtils.isEmpty(modeLivraisonCommande)) {
+        if (modeLivraisonCommande== null) {
             addErrorChampObligatoire("modeLivraisonCommande");
         }
     }
 
     private void validateModePaiement() {
-        if (StringUtils.isEmpty(modePaiementCommande)) {
+        if (modePaiementCommande == null) {
             addErrorChampObligatoire("modePaiementCommande");
         }
     }
@@ -156,9 +212,16 @@ public class CreationCommandeForm extends AbstractForm {
     private void validateMontantCommande() {
         if (StringUtils.isEmpty(montantCommande)) {
             addErrorChampObligatoire("montantCommande");
-        }else if(!CheckFormatUtil.isDecimalNumber(modeLivraisonCommande)){
+        } else if (!CheckFormatUtil.isDecimalNumber(montantCommande)) {
             addError("montantCommande", LangUtil.getMessage(currentLocale, "error.format.nombre.decimal"));
         }
     }
 
+    private void validateClient(){
+        if(StringUtils.isEmpty(idClientSelected) && creerNouveauClient == false){
+            addError("creerNouveauClient", LangUtil.getMessage(currentLocale, "error.creation.commande.client.obligatoire"));
+        }else if(creerNouveauClient == true && creationClientForm.hasErrors()){
+            addError("creerNouveauClient", LangUtil.getMessage(currentLocale, "error.creation.commande.client.invalide"));
+        }
+    }
 }

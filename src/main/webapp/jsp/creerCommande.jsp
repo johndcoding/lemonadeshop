@@ -7,6 +7,8 @@
 <html>
 <head>
     <link type="text/css" rel="stylesheet" href="<c:url value="/static/css/style.css"/>">
+    <script src="<c:url value="/static/lib/js/jquery-2.1.4.js"/>" ></script>
+    <script src="<c:url value="/static/js/main.js"/>" ></script>
     <title><fmt:message key="commande.creation.titre" bundle="${buld}"/></title>
 </head>
 <body>
@@ -18,8 +20,71 @@
     <c:if test="${not empty msgError}">
         <p class="error"><c:out value="${msgError}"/></p>
     </c:if>
-    <c:import url="../partial/creerClientForm.jsp"/>
+    <fieldset>
+        <legend><fmt:message key="client.fieldset.informations" bundle="${buld}"/></legend>
 
+        <table>
+            <tbody>
+            <tr>
+                <td>
+                    <label for="creerNouveauClient">
+                        <fmt:message key="commande.creer.nouveau.client" bundle="${buld}"/>
+                </td>
+                <td>
+                    <c:choose>
+                        <c:when test="true == ${commandeForm.listClientExistant}">
+                            <fmt:message key="formulaire.radio.oui" bundle="${buld}"/>
+                            <input type="radio" id="creerNouveauClient"
+                                   name="creerNouveauClient" value="true"
+                                   checked/>
+                            <fmt:message key="formulaire.radio.non" bundle="${buld}"/>
+                            <input type="radio" id="creerNouveauClient"
+                                   name="creerNouveauClient"
+                                   value="false"/>
+
+                        </c:when>
+                        <c:otherwise>
+                            <fmt:message key="formulaire.radio.oui" bundle="${buld}"/>
+                            <input type="radio" id="creerNouveauClient"
+                                   name="creerNouveauClient"
+                                   value="true"/>
+                            <fmt:message key="formulaire.radio.non" bundle="${buld}"/>
+                            <input type="radio" id="creerNouveauClient"
+                                   name="creerNouveauClient" value="false"
+                                   checked/>
+                        </c:otherwise>
+                    </c:choose>
+                </td>
+                <td><span class="error"><c:out value="${commandeForm.errors['creerNouveauClient']}"/></span></td>
+            </tr>
+            <tr>
+                <td>
+                </td>
+                <td>
+                    <select name="clientExistant">
+                        <option value=""></option>
+                        <c:forEach items="${commandeForm.listClientExistant}" var="item">
+                            <c:choose>
+                                <c:when test="${item.selected}">
+                                    <option value="<c:out value="${item.value}"/>" selected><c:out
+                                            value="${item.libelle}"/></option>
+                                </c:when>
+                                <c:otherwise>
+                                    <option value="<c:out value="${item.value}" />"><c:out
+                                            value="${item.libelle}"/></option>
+                                </c:otherwise>
+                            </c:choose>
+                        </c:forEach>
+                    </select>
+                </td>
+                <td></td>
+            </tr>
+            </tbody>
+        </table>
+        <div id="formClient">
+            <c:import url="../partial/creerClientForm.jsp"/>
+        </div>
+    </fieldset>
 
     <fieldset>
         <legend><fmt:message key="commande.fielset.informations" bundle="${buld}"/></legend>

@@ -19,7 +19,11 @@
     <c:if test="${not empty msgError}">
         <p class="error"><c:out value="${msgError}"/></p>
     </c:if>
-    <c:import url="../partial/creerClientForm.jsp"/>
+    <fieldset>
+        <legend><fmt:message key="client.fieldset.informations" bundle="${buld}"/></legend>
+        <c:import url="../partial/creerClientForm.jsp"/>
+    </fieldset>
+
 
     <input type="submit" value="<fmt:message key="formulaire.valider" bundle="${buld}" />"/>
     <input type="reset" value="<fmt:message key="formulaire.raz" bundle="${buld}" />">
