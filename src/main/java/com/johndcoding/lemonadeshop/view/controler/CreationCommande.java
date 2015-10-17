@@ -1,6 +1,7 @@
 package com.johndcoding.lemonadeshop.view.controler;
 
 
+import com.johndcoding.lemonadeshop.entity.Client;
 import com.johndcoding.lemonadeshop.view.RequestConstants;
 import com.johndcoding.lemonadeshop.view.SessionConstants;
 import com.johndcoding.lemonadeshop.view.converter.ClientFormConverter;
@@ -71,6 +72,11 @@ public class CreationCommande extends HttpServlet {
                     req.getSession().setAttribute(SessionConstants.MAP_CLIENTS, mapClients);
                 }
                 mapClients.put(idClient, client);
+            }else{
+                String idClientExistant = commandeForm.getIdClientSelected();
+                Map<String, ClientDTO> mapClients = (Map<String, ClientDTO>) req.getSession().getAttribute(SessionConstants.MAP_CLIENTS);
+                ClientDTO client = (ClientDTO) mapClients.get(idClientExistant);
+                commande.setClient(client);//TODO
             }
             mapCommandes.put(idCommande, commande);
             req.setAttribute(RequestConstants.CURENT_COMMANDE, commande);

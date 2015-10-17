@@ -2,5 +2,5 @@ package com.johndcoding.lemonadeshop.entity;
 
 
 public enum ModeLivraisonEnum {
-    RAPIDE, NORMALE;
+    RAPIDE, NORMAL;
 }
